@@ -17,9 +17,12 @@ const currencyFormatter = new Intl.NumberFormat('pt-BR', {
 // ==============================
 
 function sanitizeInput(text) {
+
     return text
-        .replace(/[<>]/g, '')
+        .replace(/[<>"'`]/g, '') // remove caracteres perigosos
+        .replace(/\s+/g, ' ')    // evita múltiplos espaços
         .trim();
+
 }
 
 // ==============================
@@ -40,17 +43,50 @@ function validateInput(description, amount, type) {
         return { isValid: false, error: 'Descrição muito longa.' };
     }
 
+    // 🔐 valida caracteres permitidos
+    const validPattern =
+    /^[A-Za-z0-9À-ÿ\s.,()-]+$/;
+
+    if (!validPattern.test(description)) {
+
+        return {
+            isValid: false,
+            error: 'Descrição contém caracteres inválidos.'
+        };
+
+    }
+
     if (!amount || isNaN(amount)) {
         return { isValid: false, error: 'Valor inválido.' };
     }
 
-    const numericAmount = parseFloat(amount);
+    const numericAmount =
+    parseFloat(amount);
+
+    // 🔐 valida número finito
+    if (!Number.isFinite(numericAmount)) {
+
+        return {
+            isValid: false,
+            error: 'Valor inválido.'
+        };
+
+    }
+
+    // 🔐 valida casas decimais
+    if (!/^\d+(\.\d{1,2})?$/.test(amount)) {
+
+        return {
+            isValid: false,
+            error: 'Valor deve ter no máximo 2 casas decimais.'
+        };
+
+    }
 
     if (numericAmount <= 0) {
         return { isValid: false, error: 'Valor deve ser maior que zero.' };
     }
 
-    // 🔐 Limite máximo (proteção lógica)
     if (numericAmount > 1000000000) {
         return { isValid: false, error: 'Valor muito alto.' };
     }
@@ -60,6 +96,7 @@ function validateInput(description, amount, type) {
     }
 
     return { isValid: true };
+
 }
 
 // ==============================
@@ -78,6 +115,15 @@ function atomicAddTransaction(description, amount, type) {
 
     try {
 
+        // 🔐 LIMITE DE TRANSAÇÕES (proteção contra excesso)
+        if (transactions.length >= 1000) {
+
+            alert("Limite máximo de transações atingido.");
+
+            return false;
+
+        }
+
         const transaction = {
             id: generateId(),
             description: sanitizeInput(description),
@@ -85,7 +131,6 @@ function atomicAddTransaction(description, amount, type) {
             type: type,
             date: new Date().toISOString()
         };
-
         // salva temporariamente
         const tempTransactions = [...transactions];
 
@@ -236,17 +281,38 @@ function loadStorage() {
 
         if (stored) {
 
-            transactions = JSON.parse(stored);
+            const parsed =
+                JSON.parse(stored);
+
+            // 🔐 valida se é array
+            if (Array.isArray(parsed)) {
+
+                transactions = parsed;
+
+            } else {
+
+                console.warn(
+                    'Dados inválidos detectados.'
+                );
+
+                transactions = [];
+
+            }
 
         }
 
     } catch (error) {
 
-        console.error('Erro ao carregar.');
+        console.error(
+            'Erro ao carregar storage:',
+            error
+        );
 
         transactions = [];
 
     }
+
+}
 
 }
 
@@ -302,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
     calculateTotals();
 
 });
-});
+
 
 // ============================================================
 // FIM DO SCRIPT
