@@ -23,6 +23,21 @@ HelpCommerce provides a simple and intuitive financial dashboard that allows use
 
 Small and medium-sized business owners.
 
+## Security Considerations
+
+This project applies basic secure development practices:
+
+- Input validation
+- Prevention of invalid values
+- Safe DOM manipulation
+- Structured JavaScript logic
+
+Future improvements may include:
+
+- XSS protection
+- Data sanitization
+- Secure authentication methods
+  
 ## Technologies Used
 
 - HTML5
