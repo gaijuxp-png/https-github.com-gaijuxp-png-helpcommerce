@@ -1,6 +1,6 @@
 # HelpCommerce
 
-## 📌 Project Description
+## Project Description
 
 HelpCommerce is a financial control web system designed for small and medium-sized businesses.
 
@@ -11,19 +11,19 @@ The platform allows users to:
 - Calculate totals automatically
 - Visualize financial summaries
 
-## 🎯 Problem
+## Problem
 
 Many small entrepreneurs struggle to manage their cash flow and track income and expenses efficiently.
 
-## 💡 Solution
+## Solution
 
 HelpCommerce provides a simple and intuitive financial dashboard that allows users to record and monitor financial movements easily.
 
-## 👥 Target Audience
+## arget Audience
 
 Small and medium-sized business owners.
 
-## 🛠 Technologies Used
+## Technologies Used
 
 - HTML5
 - CSS3
@@ -34,6 +34,8 @@ Small and medium-sized business owners.
 1. Download the project files
 2. Open index.html in a browser
 
-## 👨‍💻 Team Members
+## Team Members
+Gabriel jun
+Luan Hideki
 
-(Add your group names here)
+(Helpcommerce!)
