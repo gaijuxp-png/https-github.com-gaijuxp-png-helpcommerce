@@ -199,14 +199,13 @@ function calculateTotals() {
 
     transactions.forEach(tx => {
 
-        if (tx.type === 'income') {
-            income += tx.amount;
-        }
+        transactions.forEach(tx => {
 
-        if (tx.type === 'expense') {
-            expense += tx.amount;
-        }
-
+    // 🔐 valida dados antes de renderizar
+    if (!tx || !tx.description || !tx.amount) {
+        return;
+    }
+            
     });
 
     const net = income - expense;
@@ -253,9 +252,11 @@ function renderTransactions() {
 
         btn.textContent = '🗑️';
 
-        btn.onclick = () => {
-            atomicDeleteTransaction(tx.id);
-        };
+        btn.addEventListener('click', () => {
+
+    atomicDeleteTransaction(tx.id);
+
+});
 
         li.appendChild(desc);
         li.appendChild(amount);
