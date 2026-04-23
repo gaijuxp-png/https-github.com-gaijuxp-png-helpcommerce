@@ -1,296 +1,197 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
     <!-- Meta Tags -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <!-- 🔐 Content Security Policy (Melhorada) -->
     <meta http-equiv="Content-Security-Policy"
-content="
-default-src 'self';
-script-src 'self';
-style-src 'self' 'unsafe-inline';
-img-src 'self' data:;
-font-src 'self';
-connect-src 'self';
-object-src 'none';
-base-uri 'self';
-form-action 'self';
-frame-ancestors 'none';
-upgrade-insecure-requests;
-">
-    <meta name="description" content="Helpcommerce - Dashboard Financeiro Profissional para PMEs">
-    <meta name="theme-color" content="#1E3A8A">
-    
+    content="
+    default-src 'self';
+    script-src 'self';
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' data:;
+    font-src 'self';
+    connect-src 'self';
+    media-src 'self';
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'none';
+    upgrade-insecure-requests;
+    ">
+
+    <meta name="description"
+    content="Helpcommerce - Dashboard Financeiro Profissional para PMEs">
+
+    <meta name="theme-color"
+    content="#1E3A8A">
+
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' font-weight='bold' fill='%231E3A8A'>H</text></svg>">
-    
+    <link rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,
+    <svg xmlns='http://www.w3.org/2000/svg'
+    viewBox='0 0 100 100'>
+    <text y='75'
+    font-size='75'
+    font-weight='bold'
+    fill='%231E3A8A'>H</text>
+    </svg>">
+
     <!-- Título -->
     <title>Helpcommerce - Dashboard Financeiro</title>
-    
+
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet"
+    href="styles.css">
+
 </head>
+
 <body>
-    <!-- ============================================================
-         CABEÇALHO PRINCIPAL
-         ============================================================ -->
-    <header class="main-header">
-        <div class="container header-container">
-            <!-- Logo -->
-            <div class="logo-section">
-                <h1 class="logo">
-                    <span class="logo-icon">💰</span>
-                    Helpcommerce
-                </h1>
-            </div>
 
-            <!-- Navegação Principal -->
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#dashboard-section" class="nav-link">Dashboard</a></li>
-                    <li><a href="#transactions-section" class="nav-link">Transações</a></li>
-                    <li><a href="#add-transaction-section" class="nav-link">Adicionar</a></li>
-                </ul>
-            </nav>
+<header class="main-header">
+<div class="container header-container">
 
-            <!-- Menu de Usuário (placeholder para integração com Keycloak) -->
-            <div class="user-menu">
-                <button class="user-menu-btn" id="user-menu-btn">
-                    <span class="user-avatar">👤</span>
-                    <span class="user-name">Usuário</span>
-                </button>
-                <div class="user-dropdown" id="user-dropdown" style="display: none;">
-                    <a href="#profile" class="dropdown-item">Meu Perfil</a>
-                    <a href="#settings" class="dropdown-item">Configurações</a>
-                    <hr class="dropdown-divider">
-                    <a href="#" class="dropdown-item logout-link">Sair</a>
-                </div>
-            </div>
-        </div>
-    </header>
+<div class="logo-section">
+<h1 class="logo">
+<span class="logo-icon">💰</span>
+Helpcommerce
+</h1>
+</div>
 
-    <!-- ============================================================
-         CONTEÚDO PRINCIPAL
-         ============================================================ -->
-    <main class="main-content">
-        <div class="container">
-            <!-- Seção: Visão Geral Financeira -->
-            <section id="dashboard-section" class="dashboard-overview">
-                <div class="section-header">
-                    <h2>Visão Geral Financeira</h2>
-                    <p class="section-subtitle">Acompanhe seu desempenho financeiro em tempo real</p>
-                </div>
+<nav class="main-nav">
+<ul>
+<li><a href="#dashboard-section">Dashboard</a></li>
+<li><a href="#transactions-section">Transações</a></li>
+<li><a href="#add-transaction-section">Adicionar</a></li>
+</ul>
+</nav>
 
-                <!-- Cards de Resumo -->
-                <div class="summary-cards">
-                    <!-- Card: Receita Total -->
-                    <div class="card income-card">
-                        <div class="card-icon">📈</div>
-                        <h3 class="card-title">Receita Total</h3>
-                        <p class="card-value" id="total-income">R$ 0,00</p>
-                        <span class="card-label">Últimos 30 dias</span>
-                    </div>
+</div>
+</header>
 
-                    <!-- Card: Despesa Total -->
-                    <div class="card expense-card">
-                        <div class="card-icon">📉</div>
-                        <h3 class="card-title">Despesa Total</h3>
-                        <p class="card-value" id="total-expense">R$ 0,00</p>
-                        <span class="card-label">Últimos 30 dias</span>
-                    </div>
+<main class="main-content">
+<div class="container">
 
-                    <!-- Card: Saldo Líquido -->
-                    <div class="card net-total-card">
-                        <div class="card-icon">💎</div>
-                        <h3 class="card-title">Saldo Líquido</h3>
-                        <p class="card-value" id="net-total">R$ 0,00</p>
-                        <span class="card-label">Saldo disponível</span>
-                    </div>
-                </div>
-            </section>
+<section id="dashboard-section">
 
-            <!-- Seção: Adicionar Nova Transação -->
-            <section id="add-transaction-section" class="transaction-form-section">
-                <div class="section-header">
-                    <h2>Adicionar Nova Transação</h2>
-                    <p class="section-subtitle">Registre receitas e despesas do seu negócio</p>
-                </div>
+<h2>Visão Geral Financeira</h2>
 
-                <form id="transaction-form" class="form-grid">
-                    <!-- Descrição -->
-                    <div class="form-group full-width">
-                        <label for="description" class="form-label">Descrição <span class="required">*</span></label>
-                        <input 
-                            type="text" 
-                            id="description" 
-                            class="form-input"
-                            placeholder="Ex: Venda de Produto X, Pagamento de Fornecedor"
-                            required
-                        >
-                        <span class="form-hint">Descreva brevemente a transação</span>
-                    </div>
+<p id="total-income">R$ 0,00</p>
+<p id="total-expense">R$ 0,00</p>
+<p id="net-total">R$ 0,00</p>
 
-                    <!-- Valor -->
-                    <div class="form-group">
-                        <label for="amount" class="form-label">Valor <span class="required">*</span></label>
-                        <div class="input-group">
-                            <span class="input-prefix">R$</span>
-                            <input 
-                                type="number" 
-                                id="amount" 
-                                class="form-input"
-                                placeholder="0,00"
-                                step="0.01"
-                                min="0"
-                                required
-                            >
-                        </div>
-                        <span class="form-hint">Valor da transação</span>
-                    </div>
+</section>
 
-                    <!-- Tipo de Transação -->
-                    <div class="form-group">
-                        <label for="type" class="form-label">Tipo <span class="required">*</span></label>
-                        <select id="type" class="form-select" required>
-                            <option value="">Selecione um tipo</option>
-                            <option value="income">📈 Receita</option>
-                            <option value="expense">📉 Despesa</option>
-                        </select>
-                        <span class="form-hint">Receita ou Despesa</span>
-                    </div>
+<section id="add-transaction-section">
 
-                    <!-- Categoria -->
-                    <div class="form-group">
-                        <label for="category" class="form-label">Categoria (Opcional)</label>
-                        <input 
-                            type="text" 
-                            id="category" 
-                            class="form-input"
-                            placeholder="Ex: Vendas, Marketing, Fornecedores"
-                        >
-                        <span class="form-hint">Categorie sua transação</span>
-                    </div>
+<h2>Adicionar Nova Transação</h2>
 
-                    <!-- Status da Transação (hidden, para futuro) -->
-                    <input type="hidden" id="status" value="completed">
+<form id="transaction-form"
+autocomplete="off">
 
-                    <!-- Botão Submit -->
-                    <div class="form-group full-width">
-                        <button type="submit" class="btn btn-primary btn-large">
-                            <span class="btn-icon">➕</span>
-                            Adicionar Transação
-                        </button>
-                    </div>
-                </form>
+<!-- Descrição -->
+<label for="description">
+Descrição *
+</label>
 
-                <!-- Mensagem de Feedback -->
-                <div class="form-message success-message" id="form-success-message" style="display: none;">
-                    <span class="message-icon">✓</span>
-                    Transação adicionada com sucesso!
-                </div>
-                <div class="form-message error-message" id="form-error-message" style="display: none;">
-                    <span class="message-icon">⚠️</span>
-                    <span id="error-text"></span>
-                </div>
-            </section>
+<input
+type="text"
+id="description"
+placeholder="Ex: Venda de Produto X"
+maxlength="255"
+pattern="[A-Za-z0-9À-ÿ\s.,()-]+"
+required
+>
 
-            <!-- Seção: Transações Recentes -->
-            <section id="transactions-section" class="recent-transactions-section">
-                <div class="section-header">
-                    <h2>Transações Recentes</h2>
-                    <p class="section-subtitle">Histórico de todas as suas transações</p>
-                </div>
+<!-- Valor -->
+<label for="amount">
+Valor *
+</label>
 
-                <!-- Controles de Filtro -->
-                <div class="filter-controls">
-                    <!-- Busca -->
-                    <div class="search-container">
-                        <span class="search-icon">🔍</span>
-                        <input 
-                            type="text" 
-                            id="search-transactions" 
-                            class="form-input search-input"
-                            placeholder="Buscar transações..."
-                        >
-                    </div>
+<input
+type="number"
+id="amount"
+placeholder="0.00"
+step="0.01"
+min="0.01"
+required
+>
 
-                    <!-- Filtro por Tipo -->
-                    <select id="filter-type" class="form-select filter-select">
-                        <option value="all">Todos os Tipos</option>
-                        <option value="income">📈 Receitas</option>
-                        <option value="expense">📉 Despesas</option>
-                    </select>
+<!-- Tipo -->
+<label for="type">
+Tipo *
+</label>
 
-                    <!-- Ordenação -->
-                    <select id="sort-by" class="form-select sort-select">
-                        <option value="recent">Mais Recentes</option>
-                        <option value="oldest">Mais Antigos</option>
-                        <option value="amount-high">Maior Valor</option>
-                        <option value="amount-low">Menor Valor</option>
-                    </select>
-                </div>
+<select
+id="type"
+required>
 
-                <!-- Lista de Transações -->
-                <ul class="transaction-list" id="transaction-list">
-                    <!-- Transações serão preenchidas via JavaScript -->
-                </ul>
+<option value="">
+Selecione um tipo
+</option>
 
-                <!-- Mensagem: Nenhuma Transação -->
-                <div class="no-transactions-message" id="no-transactions-message" style="display: none;">
-                    <p>📭 Nenhuma transação encontrada.</p>
-                    <p class="no-transactions-subtitle">Comece adicionando sua primeira transação acima!</p>
-                </div>
+<option value="income">
+Receita
+</option>
 
-                <!-- Paginação (placeholder para futuro) -->
-                <div class="pagination" id="pagination" style="display: none;">
-                    <button class="pagination-btn" id="prev-page">← Anterior</button>
-                    <span class="pagination-info">Página <span id="current-page">1</span> de <span id="total-pages">1</span></span>
-                    <button class="pagination-btn" id="next-page">Próxima →</button>
-                </div>
-            </section>
+<option value="expense">
+Despesa
+</option>
 
-            <!-- Seção: Estatísticas (Placeholder) -->
-            <section class="statistics-section" style="display: none;">
-                <div class="section-header">
-                    <h2>Estatísticas</h2>
-                </div>
+</select>
 
-                <div class="charts-container">
-                    <!-- Gráfico de Pizza (placeholder) -->
-                    <div class="chart-card">
-                        <h3>Distribuição de Gastos</h3>
-                        <canvas id="expense-chart"></canvas>
-                    </div>
+<!-- Categoria -->
+<label for="category">
+Categoria (Opcional)
+</label>
 
-                    <!-- Gráfico de Linhas (placeholder) -->
-                    <div class="chart-card">
-                        <h3>Tendência Mensal</h3>
-                        <canvas id="trend-chart"></canvas>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
+<input
+type="text"
+id="category"
+maxlength="100"
+pattern="[A-Za-z0-9À-ÿ\s]+"
+placeholder="Ex: Vendas"
+>
 
-    <!-- ============================================================
-         RODAPÉ
-         ============================================================ -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <p class="footer-text">© 2024 Helpcommerce. Todos os direitos reservados.</p>
-                <div class="footer-links">
-                    <a href="#privacy" class="footer-link">Privacidade</a>
-                    <a href="#terms" class="footer-link">Termos de Uso</a>
-                    <a href="#security" class="footer-link">Segurança</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+<button type="submit">
+Adicionar Transação
+</button>
 
-    <!-- ============================================================
-         SCRIPTS
-         ============================================================ -->
-    <script src="script.js" defer></script>
+</form>
+
+</section>
+
+<section id="transactions-section">
+
+<h2>Transações</h2>
+
+<ul
+id="transaction-list">
+</ul>
+
+</section>
+
+</div>
+</main>
+
+<footer class="main-footer">
+
+<p>
+© 2024 Helpcommerce
+</p>
+
+</footer>
+
+<script
+src="script.js"
+defer>
+</script>
+
 </body>
 </html>
