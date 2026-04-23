@@ -104,7 +104,10 @@ function validateInput(description, amount, type) {
 // ==============================
 
 function generateId() {
-    return `tx_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+
+    return 'tx_' +
+        crypto.randomUUID();
+
 }
 
 // ==============================
@@ -199,10 +202,16 @@ function calculateTotals() {
 
     transactions.forEach(tx => {
 
-    // 🔐 valida antes de renderizar
-    if (!tx || !tx.description || !tx.amount) {
-        return;
-    }
+        // 🔐 valida antes de usar
+        if (
+            !tx ||
+            typeof tx.description !== 'string' ||
+            typeof tx.amount !== 'number' ||
+            !['income','expense'].includes(tx.type)
+        ) {
+            return;
+        }
+
         if (tx.type === 'income') {
             income += tx.amount;
         }
@@ -216,28 +225,18 @@ function calculateTotals() {
     const net = income - expense;
 
     document.getElementById('total-income')
-        .textContent = currencyFormatter.format(income);
+        .textContent =
+        currencyFormatter.format(income);
 
     document.getElementById('total-expense')
-        .textContent = currencyFormatter.format(expense);
+        .textContent =
+        currencyFormatter.format(expense);
 
     document.getElementById('net-total')
-        .textContent = currencyFormatter.format(net);
+        .textContent =
+        currencyFormatter.format(net);
 
 }
-
-    const net = income - expense;
-
-    document.getElementById('total-income')
-        .textContent = currencyFormatter.format(income);
-
-    document.getElementById('total-expense')
-        .textContent = currencyFormatter.format(expense);
-
-    document.getElementById('net-total')
-        .textContent = currencyFormatter.format(net);
-}
-
 // ==============================
 // RENDER SEGURO (SEM innerHTML)
 // ==============================
@@ -250,7 +249,17 @@ function renderTransactions() {
 
     transactions.forEach(tx => {
 
-        const li = document.createElement('li');
+    // 🔐 valida antes de renderizar
+    if (
+        !tx ||
+        typeof tx.description !== 'string' ||
+        typeof tx.amount !== 'number' ||
+        !['income','expense'].includes(tx.type)
+    ) {
+        return;
+    }
+
+    const li = document.createElement('li');
 
         li.className = 'transaction-item';
 
@@ -305,7 +314,12 @@ function loadStorage() {
 
             if (Array.isArray(parsed)) {
 
-                transactions = parsed;
+                transactions = parsed.filter(tx =>
+    tx &&
+    typeof tx.description === 'string' &&
+    typeof tx.amount === 'number' &&
+    ['income','expense'].includes(tx.type)
+);
 
             } else {
 
@@ -336,54 +350,54 @@ function loadStorage() {
 // FORM HANDLER
 // ==============================
 
-document
-.getElementById('transaction-form')
-.addEventListener('submit', function (e) {
-
-    e.preventDefault();
-
-    const description =
-        document.getElementById('description').value;
-
-    const amount =
-        document.getElementById('amount').value;
-
-    const type =
-        document.getElementById('type').value;
-
-    const validation =
-        validateInput(description, amount, type);
-
-    if (!validation.isValid) {
-
-        alert(validation.error);
-
-        return;
-    }
-
-    atomicAddTransaction(
-        description,
-        amount,
-        type
-    );
-
-    this.reset();
-
-});
-
-// ==============================
-// INIT
-// ==============================
-
 document.addEventListener('DOMContentLoaded', () => {
 
     loadStorage();
-
     renderTransactions();
-
     calculateTotals();
 
+    // 🔐 adiciona evento depois que DOM carregar
+    const form = document.getElementById('transaction-form');
+
+    if (form) {
+
+        form.addEventListener('submit', function (e) {
+
+            e.preventDefault();
+
+            const description =
+                document.getElementById('description').value;
+
+            const amount =
+                document.getElementById('amount').value;
+
+            const type =
+                document.getElementById('type').value;
+
+            const validation =
+                validateInput(description, amount, type);
+
+            if (!validation.isValid) {
+
+                alert(validation.error);
+                return;
+
+            }
+
+            atomicAddTransaction(
+                description,
+                amount,
+                type
+            );
+
+            this.reset();
+
+        });
+
+    }
+
 });
+
 
 
 // ============================================================
