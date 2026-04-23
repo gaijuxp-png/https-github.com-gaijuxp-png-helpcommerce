@@ -1,6 +1,6 @@
 /* ============================================================
    HELPCOMMERCE - DASHBOARD FINANCEIRO
-   Estilos Responsivos e Acessíveis
+   🔐 SEGURANÇA + RESPONSIVIDADE + ACESSIBILIDADE
    ============================================================ */
 
 /* ============================================================
@@ -10,7 +10,7 @@
 :root {
     /* Cores Primárias */
     --color-primary: #1E3A8A;
-    --color-primary-dark: #1e3a8a;
+    --color-primary-dark: #1a2f7d;
     --color-primary-light: #3B82F6;
     
     /* Cores Secundárias */
@@ -46,23 +46,7 @@
     /* Transições */
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
-    --transition-slow: 0.5s ease;
 }
-
-/* Dark Mode (Futuro) */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-background: #1F2937;
-        --color-card-bg: #374151;
-        --color-text-dark: #F9FAFB;
-        --color-text-light: #D1D5DB;
-        --color-border: #4B5563;
-    }
-}
-
-/* ============================================================
-   2. RESET CSS GLOBAL
-   ============================================================ */
 
 * {
     margin: 0;
@@ -76,7 +60,7 @@ html {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
     color: var(--color-text-dark);
     background-color: var(--color-background);
@@ -86,7 +70,7 @@ body {
 }
 
 /* ============================================================
-   3. UTILITÁRIOS GLOBAIS
+   2. UTILITÁRIOS GLOBAIS
    ============================================================ */
 
 .container {
@@ -110,27 +94,8 @@ textarea {
     font-family: inherit;
 }
 
-/* Scrollbar Customizado */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--color-background);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--color-primary);
-    border-radius: var(--border-radius-md);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--color-primary-light);
-}
-
 /* ============================================================
-   4. CABEÇALHO PRINCIPAL (HEADER)
+   3. CABEÇALHO
    ============================================================ */
 
 .main-header {
@@ -150,7 +115,6 @@ textarea {
     gap: 2rem;
 }
 
-/* Logo */
 .logo-section {
     flex: 0 0 auto;
 }
@@ -175,7 +139,6 @@ textarea {
     font-size: 2rem;
 }
 
-/* Navegação Principal */
 .main-nav {
     flex: 1;
     display: flex;
@@ -189,146 +152,31 @@ textarea {
     flex-wrap: wrap;
 }
 
-.main-nav a {
+.nav-link {
     color: var(--color-text-light);
     padding: 0.75rem 1.25rem;
     border-radius: var(--border-radius-md);
     transition: all var(--transition-fast);
     font-weight: 500;
-    position: relative;
+    display: inline-block;
 }
 
-.main-nav a:hover,
-.main-nav a:focus {
+.nav-link:hover,
+.nav-link:focus {
     background-color: var(--color-background);
     color: var(--color-primary);
-    outline: none;
-}
-
-.main-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background-color: var(--color-primary);
-    transition: all var(--transition-fast);
-    transform: translateX(-50%);
-}
-
-.main-nav a:hover::after {
-    width: 80%;
-}
-
-/* Menu de Usuário */
-.user-menu {
-    flex: 0 0 auto;
-    position: relative;
-}
-
-.user-menu-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.5rem 1rem;
-    background-color: var(--color-background);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-md);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--color-text-dark);
-}
-
-.user-menu-btn:hover {
-    background-color: var(--color-primary);
-    color: var(--color-card-bg);
-    border-color: var(--color-primary);
-}
-
-.user-avatar {
-    font-size: 1.5rem;
-}
-
-.user-dropdown {
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    right: 0;
-    background-color: var(--color-card-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-md);
-    box-shadow: var(--shadow-lg);
-    min-width: 200px;
-    z-index: 200;
-    overflow: hidden;
-}
-
-.dropdown-item {
-    display: block;
-    padding: 0.75rem 1.25rem;
-    color: var(--color-text-dark);
-    transition: all var(--transition-fast);
-    border: none;
-}
-
-.dropdown-item:hover {
-    background-color: var(--color-background);
-    color: var(--color-primary);
-    padding-left: 1.75rem;
-}
-
-.logout-link {
-    color: var(--color-accent-expense);
-}
-
-.logout-link:hover {
-    background-color: rgba(239, 68, 68, 0.1);
-}
-
-.dropdown-divider {
-    margin: 0;
-    border: none;
-    border-top: 1px solid var(--color-border);
-}
-
-/* Responsividade - Header */
-@media (max-width: 768px) {
-    .header-container {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .main-nav ul {
-        justify-content: center;
-    }
-
-    .logo {
-        font-size: 1.5rem;
-    }
-
-    .user-name {
-        display: none;
-    }
-
-    .user-dropdown {
-        right: -0.5rem;
-    }
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
 }
 
 /* ============================================================
-   5. CONTEÚDO PRINCIPAL (MAIN)
+   4. CONTEÚDO PRINCIPAL
    ============================================================ */
 
 .main-content {
     flex-grow: 1;
     padding: calc(2 * var(--spacing-unit)) 0;
 }
-
-/* ============================================================
-   6. SEÇÕES GERAIS
-   ============================================================ */
 
 section {
     background-color: var(--color-card-bg);
@@ -338,173 +186,66 @@ section {
     margin-bottom: calc(2 * var(--spacing-unit));
 }
 
-.section-header {
-    margin-bottom: calc(2 * var(--spacing-unit));
-}
-
-.section-header h2 {
+section h2 {
     font-size: 1.8rem;
     color: var(--color-text-dark);
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
     font-weight: 700;
 }
 
-.section-subtitle {
-    color: var(--color-text-light);
-    font-size: 0.95rem;
-    margin: 0;
-}
-
 /* ============================================================
-   7. DASHBOARD - VISÃO GERAL
+   5. DASHBOARD - CARDS
    ============================================================ */
 
-.dashboard-overview {
-    /* Herda estilos de section */
-}
-
-/* Cards de Resumo */
-.summary-cards {
+#dashboard-section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--spacing-unit);
 }
 
-.card {
-    padding: calc(1.5 * var(--spacing-unit));
-    border-radius: var(--border-radius-lg);
-    text-align: center;
-    box-shadow: var(--shadow-light);
-    background-color: var(--color-card-bg);
-    transition: all var(--transition-normal);
-    position: relative;
-    overflow: hidden;
-}
-
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, currentColor, transparent);
-    opacity: 0;
-    transition: opacity var(--transition-fast);
-}
-
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-}
-
-.card:hover::before {
-    opacity: 1;
-}
-
-.card-icon {
-    font-size: 2.5rem;
-    margin-bottom: var(--spacing-unit);
-}
-
-.card-title {
-    font-size: 0.95rem;
-    color: var(--color-text-light);
-    margin: 0 0 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 600;
-}
-
-.card-value {
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: var(--color-text-dark);
-    margin: 0 0 0.5rem;
-}
-
-.card-label {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    display: block;
-}
-
-/* Estilos Específicos dos Cards */
-.income-card {
-    border-left: 5px solid var(--color-secondary-income);
-    --card-color: var(--color-secondary-income);
-}
-
-.income-card .card-value {
-    color: var(--color-secondary-income);
-}
-
-.expense-card {
-    border-left: 5px solid var(--color-accent-expense);
-    --card-color: var(--color-accent-expense);
-}
-
-.expense-card .card-value {
-    color: var(--color-accent-expense);
-}
-
-.net-total-card {
-    border-left: 5px solid var(--color-primary);
-    --card-color: var(--color-primary);
-}
-
-.net-total-card .card-value {
-    color: var(--color-primary);
-}
-
-/* Responsividade - Cards */
-@media (max-width: 768px) {
-    .summary-cards {
-        grid-template-columns: 1fr;
-    }
-
-    .card {
-        padding: var(--spacing-unit);
-    }
-
-    .card-value {
-        font-size: 1.8rem;
-    }
-}
-
-/* ============================================================
-   8. FORMULÁRIO DE TRANSAÇÃO
-   ============================================================ */
-
-.transaction-form-section {
-    /* Herda estilos de section */
-}
-
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-unit);
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group.full-width {
+#dashboard-section > h2 {
     grid-column: 1 / -1;
 }
 
-.form-label {
-    font-weight: 600;
-    color: var(--color-text-dark);
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
+#dashboard-section > p {
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 1rem;
+    background: var(--color-background);
+    border-radius: var(--border-radius-md);
+    border-left: 4px solid var(--color-primary);
 }
 
-.required {
+#total-income {
+    border-left-color: var(--color-secondary-income) !important;
+    color: var(--color-secondary-income);
+}
+
+#total-expense {
+    border-left-color: var(--color-accent-expense) !important;
     color: var(--color-accent-expense);
-    margin-left: 0.25rem;
+}
+
+#net-total {
+    border-left-color: var(--color-primary) !important;
+}
+
+/* ============================================================
+   6. FORMULÁRIO
+   ============================================================ */
+
+#transaction-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-unit);
+    margin-bottom: 2rem;
+}
+
+label {
+    font-weight: 600;
+    color: var(--color-text-dark);
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    display: block;
 }
 
 .form-input,
@@ -521,7 +262,8 @@ section {
 
 .form-input:focus,
 .form-select:focus {
-    outline: none;
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
     border-color: var(--color-primary);
     box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.15);
 }
@@ -539,40 +281,58 @@ section {
     padding-right: 2.5rem;
 }
 
-.form-hint {
-    font-size: 0.8rem;
-    color: var(--color-text-muted);
-    margin-top: 0.25rem;
-}
-
-/* Input Group (com prefixo) */
-.input-group {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.input-prefix {
-    position: absolute;
-    left: 0.8rem;
-    color: var(--color-text-light);
-    font-weight: 600;
-    pointer-events: none;
-}
-
-.input-group .form-input {
-    padding-left: 2.5rem;
-}
-
-/* Mensagens de Feedback do Formulário */
-.form-message {
-    padding: var(--spacing-unit);
+.btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
     border-radius: var(--border-radius-md);
-    margin-top: var(--spacing-unit);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all var(--transition-normal);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-card-bg);
+    grid-column: 1 / -1;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-light);
+}
+
+.btn-primary:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* ============================================================
+   7. MENSAGENS DE FEEDBACK
+   ============================================================ */
+
+.form-feedback {
+    margin-bottom: 1.5rem;
+}
+
+.message {
+    padding: 1rem;
+    border-radius: var(--border-radius-md);
+    margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
     gap: 0.75rem;
     font-size: 0.95rem;
+    role: 'alert';
 }
 
 .success-message {
@@ -587,117 +347,31 @@ section {
     border: 1px solid var(--color-accent-expense);
 }
 
-.message-icon {
-    font-size: 1.25rem;
-}
-
-/* Responsividade - Formulário */
-@media (max-width: 768px) {
-    .form-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .form-group.full-width {
-        grid-column: 1;
-    }
-}
-
 /* ============================================================
-   9. BOTÕES
+   8. FILTROS E BUSCA
    ============================================================ */
 
-.btn {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: var(--border-radius-md);
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: all var(--transition-normal);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    text-align: center;
-}
-
-.btn:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.3);
-}
-
-.btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.btn-primary {
-    background-color: var(--color-primary);
-    color: var(--color-card-bg);
-}
-
-.btn-primary:hover:not(:disabled) {
-    background-color: #1a2f7d;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
-.btn-primary:active:not(:disabled) {
-    transform: translateY(0);
-    box-shadow: var(--shadow-light);
-}
-
-.btn-large {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-}
-
-.btn-icon {
-    font-size: 1.25rem;
-}
-
-/* ============================================================
-   10. TRANSAÇÕES RECENTES
-   ============================================================ */
-
-.recent-transactions-section {
-    /* Herda estilos de section */
-}
-
-/* Controles de Filtro */
 .filter-controls {
     display: flex;
     gap: var(--spacing-unit);
-    margin-bottom: calc(1.5 * var(--spacing-unit));
+    margin-bottom: 1.5rem;
     flex-wrap: wrap;
 }
 
-.search-container {
+.search-input {
     flex: 1;
     min-width: 200px;
-    position: relative;
 }
 
-.search-icon {
-    position: absolute;
-    left: 0.8rem;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: var(--color-text-light);
-}
-
-.search-input {
-    padding-left: 2.5rem;
-}
-
-.filter-select,
-.sort-select {
+#filter-type {
     min-width: 150px;
 }
 
-/* Lista de Transações */
-.transaction-list {
+/* ============================================================
+   9. LISTA DE TRANSAÇÕES
+   ============================================================ */
+
+#transaction-list {
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -707,7 +381,7 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--spacing-unit) calc(1.5 * var(--spacing-unit));
+    padding: 1rem;
     border-bottom: 1px solid var(--color-border);
     transition: background-color var(--transition-fast);
     gap: var(--spacing-unit);
@@ -721,61 +395,19 @@ section {
     background-color: var(--color-background);
 }
 
-.transaction-item:focus-within {
-    background-color: rgba(30, 58, 138, 0.05);
-}
-
-/* Partes da Transação */
-.transaction-left {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
 .transaction-icon {
     font-size: 1.5rem;
     flex-shrink: 0;
 }
 
-.transaction-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
 .transaction-description {
     font-weight: 600;
     color: var(--color-text-dark);
-    font-size: 0.95rem;
-}
-
-.transaction-metadata {
-    font-size: 0.85rem;
-    color: var(--color-text-light);
-}
-
-.transaction-category {
-    display: inline-block;
-    background-color: var(--color-background);
-    color: var(--color-text-light);
-    padding: 0.25rem 0.75rem;
-    border-radius: var(--border-radius-sm);
-    font-size: 0.8rem;
-    margin-top: 0.25rem;
-}
-
-.transaction-right {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-shrink: 0;
 }
 
 .transaction-amount {
     font-weight: 700;
     font-size: 1.1rem;
-    text-align: right;
 }
 
 .transaction-amount.income {
@@ -784,11 +416,6 @@ section {
 
 .transaction-amount.expense {
     color: var(--color-accent-expense);
-}
-
-.transaction-actions {
-    display: flex;
-    gap: 0.5rem;
 }
 
 .transaction-action-btn {
@@ -805,211 +432,58 @@ section {
     opacity: 1;
 }
 
-/* Mensagem: Sem Transações */
 .no-transactions-message {
     text-align: center;
-    padding: calc(3 * var(--spacing-unit)) var(--spacing-unit);
+    padding: 3rem 1rem;
     color: var(--color-text-light);
 }
 
-.no-transactions-message p {
-    margin: 0.5rem 0;
-    font-size: 1rem;
-}
-
-.no-transactions-message p:first-child {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.no-transactions-subtitle {
-    color: var(--color-text-muted);
-    font-style: italic;
-}
-
-/* Paginação */
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: var(--spacing-unit);
-    margin-top: calc(2 * var(--spacing-unit));
-    padding-top: var(--spacing-unit);
-    border-top: 1px solid var(--color-border);
-}
-
-.pagination-btn {
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--color-border);
-    background-color: var(--color-card-bg);
-    color: var(--color-text-dark);
-    border-radius: var(--border-radius-md);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    font-weight: 500;
-}
-
-.pagination-btn:hover {
-    background-color: var(--color-primary);
-    color: var(--color-card-bg);
-    border-color: var(--color-primary);
-}
-
-.pagination-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.pagination-info {
-    font-size: 0.95rem;
-    color: var(--color-text-light);
-    font-weight: 500;
-}
-
-/* Responsividade - Transações */
-@media (max-width: 768px) {
-    .filter-controls {
-        flex-direction: column;
-    }
-
-    .search-container,
-    .filter-select,
-    .sort-select {
-        width: 100%;
-    }
-
-    .transaction-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
-
-    .transaction-right {
-        width: 100%;
-        justify-content: space-between;
-    }
-
-    .transaction-amount {
-        text-align: left;
-    }
-}
-
 /* ============================================================
-   11. SEÇÃO DE ESTATÍSTICAS (Placeholder)
-   ============================================================ */
-
-.statistics-section {
-    /* Herda estilos de section */
-}
-
-.charts-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: calc(2 * var(--spacing-unit));
-}
-
-.chart-card {
-    background-color: var(--color-background);
-    padding: calc(1.5 * var(--spacing-unit));
-    border-radius: var(--border-radius-lg);
-}
-
-.chart-card h3 {
-    font-size: 1.1rem;
-    margin-bottom: var(--spacing-unit);
-    color: var(--color-text-dark);
-}
-
-/* ============================================================
-   12. RODAPÉ (FOOTER)
+   10. RODAPÉ
    ============================================================ */
 
 .main-footer {
     background-color: var(--color-primary);
     color: var(--color-card-bg);
-    padding: calc(2 * var(--spacing-unit)) 0;
+    padding: 2rem 0;
     margin-top: auto;
     text-align: center;
 }
 
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--spacing-unit);
-}
-
-.footer-text {
+.main-footer p {
     margin: 0;
     font-size: 0.95rem;
 }
 
-.footer-links {
-    display: flex;
-    gap: var(--spacing-unit);
-    flex-wrap: wrap;
-}
-
-.footer-link {
-    color: var(--color-card-bg);
-    transition: opacity var(--transition-fast);
-    font-size: 0.95rem;
-}
-
-.footer-link:hover {
-    opacity: 0.8;
-}
-
-/* Responsividade - Footer */
-@media (max-width: 768px) {
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .footer-links {
-        justify-content: center;
-    }
-}
-
 /* ============================================================
-   13. ACESSIBILIDADE
+   11. ACESSIBILIDADE
    ============================================================ */
 
-/* Focus visible para navegação por teclado */
 :focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
 }
 
-/* Reduzir animações se preferir */
 @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
+    * {
         animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
 }
 
 /* ============================================================
-   14. RESPONSIVIDADE GERAL
+   12. RESPONSIVIDADE
    ============================================================ */
 
-/* Tablets (768px) */
 @media (max-width: 768px) {
-    :root {
-        font-size: 15px;
+    .header-container {
+        flex-direction: column;
+        gap: 1rem;
     }
 
-    .container {
-        padding: 0 1rem;
-    }
-
-    .main-content {
-        padding: 1rem 0;
+    .logo {
+        font-size: 1.3rem;
     }
 
     section {
@@ -1017,16 +491,20 @@ section {
         margin-bottom: 1.5rem;
     }
 
-    .section-header h2 {
+    section h2 {
         font-size: 1.5rem;
     }
 
-    .logo {
-        font-size: 1.3rem;
+    #transaction-form {
+        grid-template-columns: 1fr;
+    }
+
+    .transaction-item {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
 
-/* Smartphones (480px) */
 @media (max-width: 480px) {
     :root {
         font-size: 14px;
@@ -1036,130 +514,16 @@ section {
         padding: 0 0.75rem;
     }
 
-    .main-header {
-        padding: 0.75rem 0;
-    }
-
-    .header-container {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-
-    .main-nav ul {
-        gap: 0.25rem;
-    }
-
-    .main-nav a {
-        padding: 0.5rem 0.75rem;
-        font-size: 0.9rem;
+    .logo {
+        font-size: 1.1rem;
     }
 
     section {
         padding: 1rem;
-        margin-bottom: 1rem;
     }
 
-    .section-header h2 {
-        font-size: 1.3rem;
-    }
-
-    .card {
-        padding: 1rem;
-    }
-
-    .card-value {
-        font-size: 1.5rem;
-    }
-
-    .card-icon {
-        font-size: 2rem;
-    }
-
-    .btn-large {
+    .btn-primary {
         padding: 0.75rem 1.5rem;
-        font-size: 1rem;
-    }
-
-    .transaction-item {
-        padding: 0.75rem 1rem;
-    }
-
-    .transaction-amount {
-        font-size: 1rem;
-    }
-
-    .footer-text {
-        font-size: 0.85rem;
-    }
-}
-
-/* ============================================================
-   15. UTILITÁRIOS PARA LOADING E ESTADOS
-   ============================================================ */
-
-.loading {
-    position: relative;
-    pointer-events: none;
-    opacity: 0.6;
-}
-
-.spinner {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 3px solid var(--color-border);
-    border-top-color: var(--color-primary);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.skeleton {
-    background: linear-gradient(
-        90deg,
-        var(--color-border) 25%,
-        var(--color-background) 50%,
-        var(--color-border) 75%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-    0% {
-        background-position: 200% 0;
-    }
-    100% {
-        background-position: -200% 0;
-    }
-}
-
-/* ============================================================
-   16. IMPRESSÃO (PRINT)
-   ============================================================ */
-
-@media print {
-    .main-header,
-    .main-footer,
-    .user-menu,
-    .filter-controls,
-    .btn {
-        display: none;
-    }
-
-    .main-content {
-        padding: 0;
-    }
-
-    section {
-        page-break-inside: avoid;
-        box-shadow: none;
-        border: 1px solid var(--color-border);
     }
 }
 
