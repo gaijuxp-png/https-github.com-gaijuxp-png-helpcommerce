@@ -199,14 +199,32 @@ function calculateTotals() {
 
     transactions.forEach(tx => {
 
-        transactions.forEach(tx => {
-
-    // 🔐 valida dados antes de renderizar
+    // 🔐 valida antes de renderizar
     if (!tx || !tx.description || !tx.amount) {
         return;
     }
-            
+        if (tx.type === 'income') {
+            income += tx.amount;
+        }
+
+        if (tx.type === 'expense') {
+            expense += tx.amount;
+        }
+
     });
+
+    const net = income - expense;
+
+    document.getElementById('total-income')
+        .textContent = currencyFormatter.format(income);
+
+    document.getElementById('total-expense')
+        .textContent = currencyFormatter.format(expense);
+
+    document.getElementById('net-total')
+        .textContent = currencyFormatter.format(net);
+
+}
 
     const net = income - expense;
 
@@ -285,7 +303,6 @@ function loadStorage() {
             const parsed =
                 JSON.parse(stored);
 
-            // 🔐 valida se é array
             if (Array.isArray(parsed)) {
 
                 transactions = parsed;
@@ -312,8 +329,6 @@ function loadStorage() {
         transactions = [];
 
     }
-
-}
 
 }
 
